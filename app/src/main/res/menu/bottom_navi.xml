@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Упраженения"
+        android:icon="@drawable/dribbble_1"
+        android:id = "@+id/treniprofi"/>
+    <item android:title="Отчет"
+        android:icon="@drawable/clock_1"
+        android:id = "@+id/otchetprofi"/>
+    <item android:title="Настройки"
+        android:icon="@drawable/user_1"
+        android:id = "@+id/nastroiprofi"/>
+</menu>

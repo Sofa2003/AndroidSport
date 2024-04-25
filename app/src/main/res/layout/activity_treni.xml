@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_horizontal"
+    android:background="#F6F3F3"
+    tools:context=".TreniActivity">
+
+    <RelativeLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="326dp"
+        android:layout_height="321dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="37dp">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle_shape"
+            android:textAlignment="center"
+            android:rotation="270"/>
+
+        <TextView
+            android:id="@+id/texttime"
+            android:layout_width="309dp"
+            android:layout_height="191dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="73dp"
+            android:fontFamily="@font/kanit_medium"
+            android:text="---"
+            android:gravity="center"
+            android:textSize="38dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/menuimage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="468dp"
+        android:src="@drawable/user" />
+
+    <TextView
+        android:id="@+id/textname"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_medium"
+        android:layout_alignEnd="@+id/menuimage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="-76dp"
+        android:layout_marginBottom="421dp"
+        android:gravity="center"
+        android:maxEms="20"
+        android:minEms="20"
+        android:text="TextView"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnstart"
+        android:layout_width="212dp"
+        android:layout_height="64dp"
+        android:layout_above="@+id/progress_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:text="Старт"
+        android:textSize="20dp"
+
+        android:fontFamily="@font/kanit_medium"
+        app:cornerRadius="12dp" />
+    <ImageView
+        android:id="@+id/imageback"
+        android:layout_width="46dp"
+        android:layout_height="49dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="346dp"
+        android:layout_marginBottom="658dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/arrow_up_2" />
+
+
+</RelativeLayout>
