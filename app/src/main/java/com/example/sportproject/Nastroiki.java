@@ -4,16 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Switch;
+
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Nastroiki extends AppCompatActivity {
     ImageView imageyvedo;
-
+    ImageView imagesbros;
     @Override
     @SuppressLint("MissingInflatedId")
 
@@ -22,7 +26,17 @@ public class Nastroiki extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nastroiki);
-
+        Switch keepScreenOnSwitch = findViewById(R.id.switchscrin);
+        keepScreenOnSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                } else {
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            }
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.nastroiprofi);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -48,6 +62,8 @@ public class Nastroiki extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        imagesbros = findViewById(R.id.imagesbros);
+
 
     }
 

@@ -62,87 +62,83 @@ public class TreniActivity extends AppCompatActivity {
             binding.textname.setText(name);
             binding.texttime.setText("0:"+timetreni);
             binding.menuimage.setImageResource(imageId);
-            btnstart.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("ResourceAsColor")
-                @Override
-                public void onClick(View v) {
-                    if (!isColorChanged) {
-                        btnstart.setBackgroundColor(Color.RED);
-                    } else {
-                        btnstart.setBackgroundColor(Color.GREEN);
-                    }
+
+                        long milisinfuture = Long.parseLong(timetreni) * 1000;
+                        timer = new CountDownTimer(milisinfuture, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                                int minutes = (int) millisUntilFinished / 1000 / 60;
+                                int seconds = (int) millisUntilFinished / 1000 - minutes * 60;
+
+                                if (seconds < 10) {
+                                    texttime.setText(minutes + ":0" + seconds);
+                                } else {
+                                    texttime.setText(minutes + ":" + seconds);
+                                }
+                                progressbar.setMax((int) (milisinfuture / 1000 - minutes * 60));
+                                progressbar.setProgress((int) (millisUntilFinished / 1000));
 
 
-                    isColorChanged = !isColorChanged;
-                    if(!isTimerOn) {
-                        btnstart.setText("Стоп");
-                        isTimerOn = true;
-                    }
-                    else
-                    {   onBackPressed();
-                        btnstart.setText("Старт");
-                        isTimerOn = false;
-                    }
-
-
-
-
-                    long milisinfuture = Long.parseLong(timetreni)*1000;
-                    timer = new CountDownTimer(milisinfuture,1000)
-                    {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-
-                            int minutes = (int)millisUntilFinished/1000/60;
-                            int seconds = (int)millisUntilFinished/1000 - minutes*60;
-
-                            if (seconds <10){
-                                texttime.setText(minutes+":0"+seconds);
                             }
-                            else{
-                                texttime.setText(minutes+":"+seconds);
+
+                            private String getCurrentDateTime() {
+                                Calendar calendar = Calendar.getInstance();
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
+                                return sdf.format(calendar.getTime());
                             }
-                            progressbar.setMax((int)(milisinfuture / 1000 - minutes*60));
-                            progressbar.setProgress((int) (millisUntilFinished / 1000));
-                            // texttime.setText(timetreni);
 
 
-                        }
-                        private String getCurrentDateTime() {
-                            Calendar calendar = Calendar.getInstance();
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
-                            return sdf.format(calendar.getTime());
-                        }
+                            @Override
+                            public void onFinish() {
+                                texttime.setText("Обратный отсчет завершен!");
+                                String currentDateTime = getCurrentDateTime(); // Получаем текущую дату и время
+                                String datanow = "Дата и время порождения: " + currentDateTime;
+                                SharedPreferences sharedPreferences = getSharedPreferences("TrainingResults", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("name", binding.textname.getText().toString());
+                                editor.putString("datanow", datanow);
+                                editor.apply();
 
 
+                                Intent i = new Intent(TreniActivity.this, Otchet.class);
+                                i.putExtra("name", "Упражнение завершено: " + binding.textname.getText().toString());
+                                i.putExtra("datanow", datanow);
+
+                                //startActivity(i);
+
+                            }
 
 
-
-
-                        @Override
-                        public void onFinish() {
-                            texttime.setText("Обратный отсчет завершен!");
-                            String currentDateTime = getCurrentDateTime(); // Получаем текущую дату и время
-                            String datanow = "Дата и время порождения: " + currentDateTime;
-                            SharedPreferences sharedPreferences = getSharedPreferences("TrainingResults", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("name", binding.textname.getText().toString());
-                            editor.putString("datanow",datanow);
-                            editor.apply();
-
-
-
-                            Intent i = new Intent(TreniActivity.this, Otchet.class);
-                            i.putExtra("name", "Упражнение завершено: " + binding.textname.getText().toString());
-                            i.putExtra("datanow", datanow);
-
-                           startActivity(i);
 
                         };
+                        btnstart.setOnClickListener(new View.OnClickListener()
 
-                    };
-                    timer.start();
-                }
+                            {
+                                @SuppressLint("ResourceAsColor")
+                                @Override
+                                public void onClick (View v){
+                                if (!isColorChanged) {
+                                    btnstart.setBackgroundColor(Color.RED);
+                                } else {
+                                    btnstart.setBackgroundColor(Color.GREEN);
+                                }
+
+
+                                isColorChanged = !isColorChanged;
+                                if (!isTimerOn) {
+                                    btnstart.setText("Стоп");
+                                    isTimerOn = true;
+                                    timer.start();
+                                } else {
+                                    onBackPressed();
+                                    isTimerOn = false;
+                                    timer.cancel();
+                                }
+                            }
+
+
+
 
                 public void onDestroy() {
                     TreniActivity.super.onDestroy();
@@ -156,10 +152,6 @@ public class TreniActivity extends AppCompatActivity {
 
         }
 
-
-
     }
-
-
 
 }
