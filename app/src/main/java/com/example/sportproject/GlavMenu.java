@@ -22,10 +22,10 @@ public class GlavMenu extends AppCompatActivity {
     TextView textprivet;
 
     ActivityGlavmenuBinding binding;
-    int[] imageId = {R.drawable.sportkobra,R.drawable.sportotjimanikoleni,R.drawable.sportplanka};
-    String[] name ={"Кобра","Отжимание с упором на колени","Планка"};
+    int[] imageId = {R.drawable.sportkobra,R.drawable.sportotjimanikoleni,R.drawable.sportplanka,R.drawable.sportbooks,R.drawable.sportmostik,R.drawable.sportbirpi,R.drawable.sportpress,R.drawable.sportnakloni};
+    String[] name ={"Кобра","Отжимание с упором на колени","Планка","Книжка","Ягодичный мостик","Бёрпи","Пресс","Наклоны на бок"};
 
-    String[] timetreni = {"30","60","60"};
+    String[] timetreni = {"30","60","60","45","35","60","45","40"};
     @Override
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState)
