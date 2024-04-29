@@ -109,14 +109,15 @@ public class TreniActivity extends AppCompatActivity {
                                 i.putExtra("datanow", datanow);
                                 //startActivity(i);
                             }
+
                         };
 
                         btnstart.setOnClickListener(new View.OnClickListener()
 
-                            {
-                                @SuppressLint("ResourceAsColor")
-                                @Override
-                                public void onClick (View v){
+                        {
+                            @SuppressLint("ResourceAsColor")
+                            @Override
+                            public void onClick (View v){
                                 if (!isColorChanged) {
                                     btnstart.setBackgroundColor(Color.RED);
                                 } else {
@@ -140,7 +141,8 @@ public class TreniActivity extends AppCompatActivity {
 
 
 
-                public void onDestroy() {
+
+                            public void onDestroy() {
                     TreniActivity.super.onDestroy();
                     if (timer != null) {
                         timer.cancel();
