@@ -28,9 +28,9 @@ public class ListAdapterIstoria extends ArrayAdapter<String> {
         TextView treniname = view.findViewById(R.id.textspisoktreni);
         TextView datanow =view.findViewById(R.id.textdata);
 
-        String[]parts = data.get(position).split("\n");
-        treniname.setText(parts[0]);
-        datanow.setText(parts[1]);
+        String[] parts = data.get(position).split("\n");
+        treniname.setText(parts.length > 0 ? parts[0] : "");
+        datanow.setText(parts.length > 1 ? parts[1] : "");
         return view;
 
     }

@@ -22,7 +22,9 @@ import com.example.sportproject.databinding.ActivityTreniBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Otchet extends AppCompatActivity {
     ActivityOtchetBinding binding;
@@ -30,22 +32,30 @@ public class Otchet extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-            super.onCreate(savedInstanceState);
-            binding = ActivityOtchetBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
-
-
-
-
+        super.onCreate(savedInstanceState);
+        binding = ActivityOtchetBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         SharedPreferences sharedPreferences = getSharedPreferences("TrainingResults", Context.MODE_PRIVATE);
-        List<String> data = new ArrayList<>();
+        ArrayList<String> data = new ArrayList<>();
 
+// Получаем количество элементов
+        int itemCount = sharedPreferences.getInt("itemCount", 0);
 
+// Добавляем старые данные в список
+        for (int i = 0; i < itemCount; i++) {
+            String nameOld = sharedPreferences.getString("name" , "");
+            String datanowOld = sharedPreferences.getString("datanow" , "");
+            data.add(nameOld + "\n" + datanowOld);
 
-        data.add(sharedPreferences.getString("name", "") + "\n" + sharedPreferences.getString("datanow", ""));
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("itemCount", itemCount + 1);
+        editor.apply();
 
-        ListAdapterIstoria adapterIstoria = new ListAdapterIstoria(this,data);
+// Создаем адаптер с обновленным списком
+        ListAdapterIstoria adapterIstoria = new ListAdapterIstoria(this, data);
+
+// Установка адаптера в ListView
         ListView listView = findViewById(R.id.lististoria);
         listView.setAdapter(adapterIstoria);
 
@@ -69,5 +79,13 @@ public class Otchet extends AppCompatActivity {
             }
             return false;
         });
+        // Проверяем, был ли получен запрос на очистку списка
+        if (getIntent().getBooleanExtra("clearList", false)) {
+            // Очищаем список данных
+            data.clear();
+
+            // Обновляем адаптер
+            adapterIstoria.notifyDataSetChanged();
+        }
     }
 }

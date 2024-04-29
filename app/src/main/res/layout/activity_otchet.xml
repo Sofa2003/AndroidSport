@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="228dp"
         android:fontFamily="@font/kanit_medium"
-        android:text="ИСТОРИЯ"
+        android:text="ОТЧЁТ"
         android:textColor="#000000"
         android:textSize="26sp"
         android:textStyle="bold"

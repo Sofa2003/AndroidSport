@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sportproject.databinding.ActivityTreniBinding;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class TreniActivity extends AppCompatActivity {
@@ -96,22 +99,18 @@ public class TreniActivity extends AppCompatActivity {
                                 String datanow = "Дата и время порождения: " + currentDateTime;
                                 SharedPreferences sharedPreferences = getSharedPreferences("TrainingResults", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
+
                                 editor.putString("name", binding.textname.getText().toString());
                                 editor.putString("datanow", datanow);
                                 editor.apply();
 
-
                                 Intent i = new Intent(TreniActivity.this, Otchet.class);
                                 i.putExtra("name", "Упражнение завершено: " + binding.textname.getText().toString());
                                 i.putExtra("datanow", datanow);
-
                                 //startActivity(i);
-
                             }
-
-
-
                         };
+
                         btnstart.setOnClickListener(new View.OnClickListener()
 
                             {
@@ -133,6 +132,7 @@ public class TreniActivity extends AppCompatActivity {
                                 } else {
                                     onBackPressed();
                                     isTimerOn = false;
+                                    progressbar.setProgress(0);
                                     timer.cancel();
                                 }
                             }
